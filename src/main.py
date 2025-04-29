@@ -7,13 +7,27 @@ import flet as ft
 
 
 def main(page: ft.Page):
-    page.title = "My first app"
-    friends=[]
+    page.title = "Расходы"
+    Title = ft.Text("Ваши расходы", size=30)
+    products = []
+    Expenses = ft.Text("Общая сумма расходов:")
+    total_cost = ft.Text("0")
 
-    def save(a)
-        friend = {"name": first_input.value, "age": second_input.value}
-        friends.append(friend)
-        print(friend)
+    def save(e)
+        name = first_input.value
+        cost = second_input.value
+        if not cost.isdigit():
+            print("Введите число")
+        elif int(cost) < 1:
+            print("Число должно быть роложительным")    
+        cost = int(cost)
+        total = int(total_cost.value) + cost
+        total_cost.value = total
+        products.append(f"{name}: {cost}")
+        list_area.controls = [ft.Text(value)for product in products]
+
+        page.update()
+        
 
  #   def on_change(event):
  #       print(input.value)
@@ -21,11 +35,18 @@ def main(page: ft.Page):
   #          print(f"Друг {input.value} найден")
 
     
-    first_input = ft.TextField(label="Введите имя", )
-    second_input = ft.TextField(label="Введите возрост", )
+    first_input = ft.TextField(label="Введите  названние товара", )
+    second_input = ft.TextField(label="Введите сумму товара", )
 
-    button = ft.ElevatedButton("Добавить", on_click=save)
-    page.add(first_input, second_input, button
+    button = ft.ElevatedButton("Сохронять", on_click=save)
+
+    list_area = ft.Colunn
+    page.add(Title,
+             first_input, 
+             second_input, 
+             button, 
+             list_area,
+             ft.Row([Expenses, total_cost])
 
     )
 
