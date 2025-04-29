@@ -1,18 +1,31 @@
 import flet as ft
 
+#"""friends - [
+ #   {"name": "Билли", "age": 18},
+ #   {"name": "Стив", "age": 15}
+#]"""
+
 
 def main(page: ft.Page):
     page.title = "My first app"
-    friends_list=["маша","саша","даша"]
+    friends=[]
 
-    def on_change(event):
-        print(input.value)
-        if input.value.lower() in friends_list:
-            print(f"Друг {input.value} найден")
+    def save(a)
+        friend = {"name": first_input.value, "age": second_input.value}
+        friends.append(friend)
+        print(friend)
 
-    input = ft.TextField(label="Введите текст", on_change-on_change)
+ #   def on_change(event):
+ #       print(input.value)
+ #       if input.value.lower() in friends_list:
+  #          print(f"Друг {input.value} найден")
+
     
-    page.add(input
+    first_input = ft.TextField(label="Введите имя", )
+    second_input = ft.TextField(label="Введите возрост", )
+
+    button = ft.ElevatedButton("Добавить", on_click=save)
+    page.add(first_input, second_input, button
 
     )
 
