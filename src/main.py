@@ -8,10 +8,10 @@ import flet as ft
 
 def main(page: ft.Page):
     page.title = "Расходы"
-    Title = ft.Text("Ваши расходы", size=30)
+    Title = ft.Text("Ваши расходы", size=30, italic=True)
     products = []
-    Expenses = ft.Text("Общая сумма расходов:")
-    total_cost = ft.Text("0")
+    Expenses = ft.Text("Общая сумма расходов:", size=30)
+    total_cost = ft.Text("0", size=30)
 
     def save(e)
         name = first_input.value
@@ -23,8 +23,16 @@ def main(page: ft.Page):
         cost = int(cost)
         total = int(total_cost.value) + cost
         total_cost.value = total
-        products.append(f"{name}: {cost}")
-        list_area.controls = [ft.Text(value)for product in products]
+        list_area.controls.append(
+            ft.Row(
+                controls=[
+                    ft.Text(name),
+                    ft.Text(cost, color=get_color(cost)),
+                    ft.IconButton(ft.Icons.EDIT, icon_color=ft.colors.PINK),
+                    ft.IconButton(ft.Icons.DELETE, icon_color=ft.colors.PINK)
+                ]
+            )
+        )
 
         page.update()
         
@@ -40,13 +48,13 @@ def main(page: ft.Page):
 
     button = ft.ElevatedButton("Сохронять", on_click=save)
 
-    list_area = ft.Colunn
+    list_area = ft.Colunn.expand=(True, scroll="always")
     page.add(Title,
-             first_input, 
+             ft.Row([first_input, 
              second_input, 
-             button, 
-             list_area,
+             button]), 
              ft.Row([Expenses, total_cost])
+             list_area
 
     )
 
